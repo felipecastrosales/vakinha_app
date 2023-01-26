@@ -1,37 +1,74 @@
 import 'package:flutter/material.dart';
 
-import 'package:vakinha_app/app/core/widgets/delivery_app_bar.dart';
-import 'package:vakinha_app/app/models/product_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:vakinha_app/app/core/ui/base_state/base_state.dart';
+import 'package:vakinha_app/app/core/widgets/delivery_app_bar.dart';
+import 'package:vakinha_app/app/pages/home/home_controller.dart';
+
+import 'home_state.dart';
 import 'widgets/delivery_product_tile.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends BaseState<HomePage, HomeController> {
+  @override
+  void onReady() {
+    super.onReady();
+    controller.loadProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DeliveryAppBar(),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return DeliveryProductTile(
-                  product: ProductModel(
-                    id: '1',
-                    name: 'Hamburguer',
-                    description: 'Hamburguer de carne',
-                    price: 10,
-                    image:
-                        'https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {});
+          context.read<HomeController>().loadProducts();
+        },
+        child: const Icon(Icons.add),
+      ),
+      body: BlocConsumer<HomeController, HomeState>(
+        listener: (context, state) {
+          state.status.matchAny(
+            any: () => hideLoader(),
+            loading: () => showLoader(),
+            error: () {
+              hideLoader();
+              showError(state.errorMessage ?? 'Erro ao buscar produtos');
+            },
+          );
+        },
+        buildWhen: (previous, current) {
+          return current.status.matchAny(
+            any: () => false,
+            loading: () => true,
+            success: () => true,
+          );
+        },
+        builder: (context, state) {
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: state.products.length,
+                  itemBuilder: (context, index) {
+                    final product = state.products[index];
+                    return DeliveryProductTile(
+                      product: product,
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

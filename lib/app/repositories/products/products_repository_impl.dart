@@ -1,8 +1,8 @@
 import 'dart:developer' as developer;
 
 import 'package:dio/dio.dart';
-import 'package:vakinha_app/app/core/exceptions/repository_exception.dart';
 
+import 'package:vakinha_app/app/core/exceptions/repository_exception.dart';
 import 'package:vakinha_app/app/core/rest_client/custom_dio.dart';
 import 'package:vakinha_app/app/models/product_model.dart';
 
@@ -20,7 +20,7 @@ class ProductsRepositoryImpl implements ProductsRepository {
     try {
       final result = await _dio.unAuth().get('/products');
       final data = result.data
-          .map<ProductModel>((product) => ProductModel.fromJson(product))
+          .map<ProductModel>((product) => ProductModel.fromMap(product))
           .toList();
       return data;
     } on DioError catch (e, s) {
