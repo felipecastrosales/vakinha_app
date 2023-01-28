@@ -1,29 +1,42 @@
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
+
 import 'package:vakinha_app/app/core/extensions/formatter_extension.dart';
 import 'package:vakinha_app/app/core/ui/styles/app_colors.dart';
 import 'package:vakinha_app/app/core/ui/styles/text_styles.dart';
-
+import 'package:vakinha_app/app/dto/order_product_dto.dart';
 import 'package:vakinha_app/app/models/product_model.dart';
+import 'package:vakinha_app/app/pages/home/home_controller.dart';
 
 class DeliveryProductTile extends StatelessWidget {
   const DeliveryProductTile({
     super.key,
     required this.product,
+    required this.orderProduct,
   });
 
   final ProductModel product;
+  final OrderProductDto? orderProduct;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        Navigator.pushNamed(
+        final homeController = context.read<HomeController>();
+
+        final orderProdutResult = await Navigator.pushNamed(
           context,
           '/product-detail',
           arguments: {
             'product': product,
+            'order': orderProduct,
           },
         );
+
+        if (orderProdutResult != null) {
+          homeController.addOrUpdateBag(orderProdutResult as OrderProductDto);
+        }
       },
       child: Padding(
         padding: const EdgeInsets.all(8),
