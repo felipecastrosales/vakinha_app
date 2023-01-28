@@ -15,54 +15,65 @@ class DeliveryProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    product.name,
-                    style: context.textStyles.textExtraBold.copyWith(
-                      fontSize: 16,
+    return InkWell(
+      onTap: () async {
+        Navigator.pushNamed(
+          context,
+          '/product-detail',
+          arguments: {
+            'product': product,
+          },
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      product.name,
+                      style: context.textStyles.textExtraBold.copyWith(
+                        fontSize: 16,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    product.description,
-                    style: context.textStyles.textRegular.copyWith(
-                      fontSize: 12,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      product.description,
+                      style: context.textStyles.textRegular.copyWith(
+                        fontSize: 12,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    product.price.currencyPTBR,
-                    style: context.textStyles.textMedium.copyWith(
-                      fontSize: 12,
-                      color: context.appColors.secondary,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      product.price.currencyPTBR,
+                      style: context.textStyles.textMedium.copyWith(
+                        fontSize: 12,
+                        color: context.appColors.secondary,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          FadeInImage.assetNetwork(
-            placeholder: 'assets/images/loading.gif',
-            image: product.image,
-            height: 100,
-            width: 100,
-            fit: BoxFit.cover,
-          ),
-        ],
+            FadeInImage.assetNetwork(
+              placeholder: 'assets/images/loading.gif',
+              image: product.image,
+              height: 100,
+              width: 100,
+              fit: BoxFit.cover,
+            ),
+          ],
+        ),
       ),
     );
   }

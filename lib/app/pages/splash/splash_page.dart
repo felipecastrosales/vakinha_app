@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vakinha_app/app/core/ui/helpers/sizes_extensions.dart';
-import 'package:vakinha_app/app/core/widgets/delivery_button.dart';
+import 'package:vakinha_app/app/core/ui/widgets/delivery_button.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

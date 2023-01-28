@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:vakinha_app/app/core/ui/base_state/base_state.dart';
-import 'package:vakinha_app/app/core/widgets/delivery_app_bar.dart';
+import 'package:vakinha_app/app/core/ui/widgets/delivery_app_bar.dart';
 import 'package:vakinha_app/app/pages/home/home_controller.dart';
 
 import 'home_state.dart';

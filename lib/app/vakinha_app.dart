@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'core/ui/theme/theme_config.dart';
 import 'pages/home/home_router.dart';
+import 'pages/product_detail/product_detail_router.dart';
 import 'pages/splash/splash_page.dart';
 import 'provider/application_binding.dart';
 
@@ -17,6 +18,7 @@ class VakinhaApp extends StatelessWidget {
         routes: {
           '/': (context) => const SplashPage(),
           '/home': (context) => HomeRouter.page,
+          '/product-detail': (context) => ProductDetailRouter.page,
         },
       ),
     );
