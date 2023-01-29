@@ -4,7 +4,7 @@ extension FormatterExtension on double {
   String get currencyPTBR {
     final currencyFormat = NumberFormat.currency(
       locale: 'pt_BR',
-      symbol: r'R\$',
+      symbol: 'R\$',
     );
     return currencyFormat.format(this);
   }

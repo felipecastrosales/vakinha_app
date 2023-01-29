@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 
 import 'package:bloc/bloc.dart';
+import 'package:vakinha_app/app/dto/order_product_dto.dart';
 
 import 'package:vakinha_app/app/pages/home/home_state.dart';
 import 'package:vakinha_app/app/repositories/products/products_repository.dart';
@@ -40,5 +41,26 @@ class HomeController extends Cubit<HomeState> {
         ),
       );
     }
+  }
+
+  void addOrUpdateBag(OrderProductDto orderProdut) {
+    final shoppingBag = [...state.shoppingBag];
+    final orderIndex = shoppingBag.indexWhere(
+      (product) => product.product.id == orderProdut.product.id,
+    );
+
+    if (orderIndex > -1) {
+      if (orderProdut.amount == 0) {
+        shoppingBag.removeAt(orderIndex);
+      } else {
+        shoppingBag[orderIndex] = orderProdut;
+      }
+    } else {
+      shoppingBag.add(orderProdut);
+    }
+
+    emit(
+      state.copyWith(shoppingBag: shoppingBag),
+    );
   }
 }
