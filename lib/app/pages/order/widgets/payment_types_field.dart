@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_awesome_select/flutter_awesome_select.dart';
 import 'package:vakinha_app/app/core/ui/helpers/sizes_extensions.dart';
 import 'package:vakinha_app/app/core/ui/styles/text_styles.dart';
+import 'package:vakinha_app/app/models/payment_type_model.dart';
 
 class PaymentTypesField extends StatelessWidget {
   const PaymentTypesField({
     super.key,
+    required this.paymentTypes,
     required this.onChanged,
-    required this.valid,
+    required this.isValid,
     required this.selectedValue,
   });
 
+  final List<PaymentTypeModel> paymentTypes;
   final ValueChanged<int> onChanged;
-  final bool valid;
+  final bool isValid;
   final String selectedValue;
 
   @override
@@ -24,11 +28,9 @@ class PaymentTypesField extends StatelessWidget {
         children: [
           Text(
             'Forma de pagamento',
-            style: context.textStyles.textRegular.copyWith(
-              fontSize: 16,
-            ),
+            style: context.textStyles.textRegular.copyWith(fontSize: 16),
           ),
-          SmartSelect.single(
+          SmartSelect<String>.single(
             title: '',
             placeholder: '',
             modalFilter: false,
@@ -37,7 +39,9 @@ class PaymentTypesField extends StatelessWidget {
             selectedValue: selectedValue,
             choiceType: S2ChoiceType.radios,
             modalType: S2ModalType.bottomSheet,
-            onChange: (value) => onChanged(int.parse(value.value)),
+            onChange: (selected) => onChanged(
+              int.parse(selected.value),
+            ),
             tileBuilder: (context, state) => InkWell(
               onTap: state.showModal,
               child: Column(
@@ -57,8 +61,8 @@ class PaymentTypesField extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (valid) const SizedBox.shrink() else const Divider(),
-                  if (valid)
+                  if (isValid) const SizedBox.shrink() else const Divider(),
+                  if (isValid)
                     const SizedBox.shrink()
                   else
                     Padding(
@@ -66,8 +70,8 @@ class PaymentTypesField extends StatelessWidget {
                       child: Text(
                         'Selecione uma forma de pagamento',
                         style: context.textStyles.textRegular.copyWith(
-                          fontSize: 13,
                           color: Colors.red,
+                          fontSize: 13,
                         ),
                       ),
                     ),
@@ -78,11 +82,14 @@ class PaymentTypesField extends StatelessWidget {
               title: (_, item) => item['title'] ?? '',
               value: (_, item) => item['value'] ?? '',
               group: (_, item) => 'Selecione uma forma de pagamento',
-              source: [
-                {'title': 'Cartão de crédito', 'value': '1'},
-                {'title': 'Cartão de débito', 'value': '2'},
-                {'title': 'Boleto', 'value': '3'},
-              ],
+              source: paymentTypes
+                  .map(
+                    (payment) => {
+                      'value': payment.id.toString(),
+                      'title': payment.name,
+                    },
+                  )
+                  .toList(),
             ),
           ),
         ],
