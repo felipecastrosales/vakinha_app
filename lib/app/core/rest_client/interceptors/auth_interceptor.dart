@@ -23,7 +23,7 @@ class AuthInterceptor extends Interceptor {
     final accessToken = sharedPreferences.getString('accessToken');
 
     if (accessToken != null) {
-      options.headers[HttpHeaders.authorizationHeader] = 'Bearer $accessToken';
+      options.headers['Authorization'] = 'Bearer $accessToken';
     }
 
     return handler.next(options);

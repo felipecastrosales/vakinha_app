@@ -27,11 +27,11 @@ class LoginController extends Cubit<LoginState> {
       final authModel = await _authRepository.login(email, password);
       final sharedPreferences = await SharedPreferences.getInstance();
       await sharedPreferences.setString(
-        'access_token',
+        'accessToken',
         authModel.accessToken,
       );
       await sharedPreferences.setString(
-        'refresh_token',
+        'refreshToken',
         authModel.refreshToken,
       );
       emit(
