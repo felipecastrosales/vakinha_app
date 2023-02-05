@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vakinha_app/app/core/extensions/formatter_extension.dart';
-
 import 'package:vakinha_app/app/core/ui/helpers/sizes_extensions.dart';
 import 'package:vakinha_app/app/core/ui/styles/text_styles.dart';
 import 'package:vakinha_app/app/dto/order_product_dto.dart';
@@ -14,12 +13,17 @@ class ShopppingBagWidget extends StatelessWidget {
 
   final List<OrderProductDto> bag;
 
-  Future<void> _goOrder(BuildContext context) async {
+  Future<void> _goOrder(BuildContext context, [bool mounted = true]) async {
     final sharedPreferences = await SharedPreferences.getInstance();
+    if (!mounted) return;
     final navigator = Navigator.of(context);
-    if (!sharedPreferences.containsKey('accessToken')) {
+    if (!sharedPreferences.containsKey('access_token')) {
       final loginResult = await navigator.pushNamed('/auth/login');
+      if (loginResult == null || loginResult == false) {
+        return;
+      }
     }
+    await navigator.pushNamed('/order', arguments: bag);
   }
 
   @override
