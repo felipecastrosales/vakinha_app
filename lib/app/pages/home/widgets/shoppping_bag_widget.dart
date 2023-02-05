@@ -13,12 +13,17 @@ class ShopppingBagWidget extends StatelessWidget {
 
   final List<OrderProductDto> bag;
 
-  Future<void> _goOrder(BuildContext context) async {
+  Future<void> _goOrder(BuildContext context, [bool mounted = true]) async {
     final sharedPreferences = await SharedPreferences.getInstance();
+    if (!mounted) return;
     final navigator = Navigator.of(context);
     if (!sharedPreferences.containsKey('access_token')) {
       final loginResult = await navigator.pushNamed('/auth/login');
+      if (loginResult == null || loginResult == false) {
+        return;
+      }
     }
+    await navigator.pushNamed('/order', arguments: bag);
   }
 
   @override

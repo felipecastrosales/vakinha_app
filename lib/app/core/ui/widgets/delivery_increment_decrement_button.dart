@@ -8,15 +8,24 @@ class DeliveryIncrementDecrementButton extends StatelessWidget {
     required this.amount,
     required this.onIncrement,
     required this.onDecrement,
-  });
+  }) : _compact = false;
+
+  const DeliveryIncrementDecrementButton.compact({
+    super.key,
+    required this.amount,
+    required this.onIncrement,
+    required this.onDecrement,
+  }) : _compact = true;
 
   final int amount;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
+  final bool _compact;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: _compact ? const EdgeInsets.all(5) : null,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7),
         border: Border.all(color: Colors.grey),
@@ -31,7 +40,7 @@ class DeliveryIncrementDecrementButton extends StatelessWidget {
               child: Text(
                 '-',
                 style: context.textStyles.textMedium.copyWith(
-                  fontSize: 22,
+                  fontSize: _compact ? 10 : 22,
                   color: Colors.grey,
                 ),
               ),
@@ -40,7 +49,7 @@ class DeliveryIncrementDecrementButton extends StatelessWidget {
           Text(
             amount.toString(),
             style: context.textStyles.textRegular.copyWith(
-              fontSize: 17,
+              fontSize: _compact ? 13 : 17,
               color: context.appColors.secondary,
             ),
           ),
@@ -51,7 +60,7 @@ class DeliveryIncrementDecrementButton extends StatelessWidget {
               child: Text(
                 '+',
                 style: context.textStyles.textMedium.copyWith(
-                  fontSize: 22,
+                  fontSize: _compact ? 10 : 22,
                   color: context.appColors.secondary,
                 ),
               ),

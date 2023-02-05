@@ -14,10 +14,12 @@ dependencies:
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_awesome_select: ^6.5.0
   flutter_bloc: ^8.1.1
   flutter_dotenv: ^5.0.2
   intl: ^0.18.0
   loading_animation_widget: ^1.2.0+4
+  mask_text_input_formatter: ^2.4.0
   match: ^0.4.1
   provider: ^6.0.5
   shared_preferences: ^2.0.17
