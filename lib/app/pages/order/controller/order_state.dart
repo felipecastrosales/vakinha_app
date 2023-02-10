@@ -18,6 +18,14 @@ enum OrderStatus {
 }
 
 class OrderState extends Equatable {
+  const OrderState.initial()
+      : this._(
+          status: OrderStatus.initial,
+          orderProducts: const [],
+          paymentTypes: const [],
+          errorMessage: null,
+        );
+
   const OrderState._({
     required this.status,
     required this.orderProducts,
@@ -29,14 +37,6 @@ class OrderState extends Equatable {
   final List<OrderProductDto> orderProducts;
   final List<PaymentTypeModel> paymentTypes;
   final String? errorMessage;
-
-  const OrderState.initial()
-      : this._(
-          status: OrderStatus.initial,
-          orderProducts: const [],
-          paymentTypes: const [],
-          errorMessage: null,
-        );
 
   double get totalOrder => orderProducts.fold(
         0,

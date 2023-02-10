@@ -4,8 +4,9 @@ import 'app_colors.dart';
 import 'text_styles.dart';
 
 class AppStyles {
-  static AppStyles? _instance;
   AppStyles._();
+
+  static AppStyles? _instance;
 
   static AppStyles get instance {
     _instance ??= AppStyles._();

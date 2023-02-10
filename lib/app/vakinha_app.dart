@@ -12,10 +12,11 @@ import 'pages/splash/splash_page.dart';
 import 'provider/application_binding.dart';
 
 class VakinhaApp extends StatelessWidget {
-  final _navigatorKey = GlobalKey<NavigatorState>();
   VakinhaApp({super.key}) {
     GlobalContext.instance.navigatorKey = _navigatorKey;
   }
+
+  final _navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,17 @@
 import 'dart:convert';
 
 class PaymentTypeModel {
+  factory PaymentTypeModel.fromJson(String source) =>
+      PaymentTypeModel.fromMap(json.decode(source));
+
+  factory PaymentTypeModel.fromMap(Map<String, dynamic> map) =>
+      PaymentTypeModel(
+        id: map['id']?.toInt() ?? 0,
+        name: map['name'] ?? '',
+        acronym: map['acronym'] ?? '',
+        enabled: map['enabled'] ?? false,
+      );
+
   const PaymentTypeModel({
     required this.id,
     required this.name,
@@ -13,14 +24,6 @@ class PaymentTypeModel {
   final String acronym;
   final bool enabled;
 
-  factory PaymentTypeModel.fromMap(Map<String, dynamic> map) =>
-      PaymentTypeModel(
-        id: map['id']?.toInt() ?? 0,
-        name: map['name'] ?? '',
-        acronym: map['acronym'] ?? '',
-        enabled: map['enabled'] ?? false,
-      );
-
   Map<String, dynamic> toMap() => {
         'id': id,
         'name': name,
@@ -29,7 +32,4 @@ class PaymentTypeModel {
       };
 
   String toJson() => json.encode(toMap());
-
-  factory PaymentTypeModel.fromJson(String source) =>
-      PaymentTypeModel.fromMap(json.decode(source));
 }
