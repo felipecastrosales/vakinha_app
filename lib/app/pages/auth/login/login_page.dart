@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vakinha_app/app/core/ui/helpers/sizes_extensions.dart';
-import 'package:vakinha_app/app/core/ui/styles/text_styles.dart';
-
 import 'package:validatorless/validatorless.dart';
 
 import 'package:vakinha_app/app/core/ui/base_state/base_state.dart';
+import 'package:vakinha_app/app/core/ui/helpers/sizes_extensions.dart';
+import 'package:vakinha_app/app/core/ui/styles/text_styles.dart';
 import 'package:vakinha_app/app/core/ui/widgets/delivery_app_bar.dart';
 import 'package:vakinha_app/app/core/ui/widgets/delivery_button.dart';
 
@@ -20,14 +19,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends BaseState<LoginPage, LoginController> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailTextEditingController = TextEditingController();
-  final _passwordTextEditingController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final emailTextEditingController = TextEditingController();
+  final passwordTextEditingController = TextEditingController();
 
   @override
   void dispose() {
-    _emailTextEditingController.dispose();
-    _passwordTextEditingController.dispose();
+    emailTextEditingController.dispose();
+    passwordTextEditingController.dispose();
     super.dispose();
   }
 
@@ -61,7 +60,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Form(
-                  key: _formKey,
+                  key: formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -71,24 +70,21 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
                       ),
                       const SizedBox(height: 30),
                       TextFormField(
-                        controller: _emailTextEditingController,
+                        controller: emailTextEditingController,
+                        decoration: const InputDecoration(labelText: 'Email'),
                         validator: Validatorless.multiple([
                           Validatorless.required('Email obrigatório'),
                           Validatorless.email('Email inválido'),
                         ]),
-                        decoration: const InputDecoration(
-                          labelText: 'Email',
-                        ),
                       ),
                       const SizedBox(height: 30),
                       TextFormField(
-                        controller: _passwordTextEditingController,
+                        controller: passwordTextEditingController,
+                        decoration: const InputDecoration(labelText: 'Senha'),
+                        obscureText: true,
                         validator: Validatorless.multiple([
                           Validatorless.required('Senha obrigatória'),
                         ]),
-                        decoration: const InputDecoration(
-                          labelText: 'Senha',
-                        ),
                       ),
                       const SizedBox(height: 30),
                       Center(
@@ -97,11 +93,11 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
                           label: 'Entrar',
                           onPressed: () {
                             final isValid =
-                                _formKey.currentState?.validate() ?? false;
+                                formKey.currentState?.validate() ?? false;
                             if (isValid) {
                               controller.login(
-                                email: _emailTextEditingController.text,
-                                password: _passwordTextEditingController.text,
+                                email: emailTextEditingController.text,
+                                password: passwordTextEditingController.text,
                               );
                             }
                           },
