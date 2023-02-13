@@ -19,15 +19,19 @@ class OrderCompletedPage extends StatelessWidget {
                 height: context.percentHeight(.2),
               ),
               Image.asset('assets/images/logo_rounded.png'),
-              const SizedBox(height: 10),
-              Text(
-                'Pedido realizado com sucesso, em breve você receberá a confirmação do seu pedido!',
-                textAlign: TextAlign.center,
-                style: context.textStyles.textExtraBold.copyWith(
-                  fontSize: 18,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 28,
+                  vertical: 32,
+                ),
+                child: Text(
+                  'Pedido realizado com sucesso, em breve você receberá a confirmação do seu pedido!',
+                  textAlign: TextAlign.center,
+                  style: context.textStyles.textExtraBold.copyWith(
+                    fontSize: 18,
+                  ),
                 ),
               ),
-              const SizedBox(height: 40),
               DeliveryButton(
                 label: 'FECHAR',
                 width: context.percentWidth(.8),

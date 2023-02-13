@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:vakinha_app/app/core/ui/base_state/base_state.dart';
 import 'package:vakinha_app/app/core/ui/widgets/delivery_app_bar.dart';
+import 'package:vakinha_app/app/core/ui/widgets/delivery_button.dart';
 import 'package:vakinha_app/app/pages/home/home_controller.dart';
 
 import 'home_state.dart';
@@ -47,6 +48,24 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
           );
         },
         builder: (context, state) {
+          if (state.products.isEmpty) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: Text(
+                    'Nenhum produto encontrado.',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                DeliveryButton(
+                  onPressed: () => controller.loadProducts(),
+                  label: 'Tentar novamente',
+                ),
+              ],
+            );
+          }
           return Column(
             children: [
               Expanded(

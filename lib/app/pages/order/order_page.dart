@@ -165,6 +165,7 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                         title: 'Endereço de entrega',
                         hintText: 'Digite um endereço',
                         controller: addressTextEditingController,
+                        keyboardType: TextInputType.streetAddress,
                         validator: Validatorless.required(
                           'Endereço obrigatório',
                         ),
@@ -174,6 +175,7 @@ class _OrderPageState extends BaseState<OrderPage, OrderController> {
                         title: 'CPF',
                         hintText: 'Digite o CPF',
                         inputFormatters: [cpfMask],
+                        keyboardType: TextInputType.number,
                         controller: documentTextEditingController,
                         validator: Validatorless.multiple([
                           Validatorless.required('CPF obrigatório'),

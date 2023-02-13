@@ -10,6 +10,7 @@ class OrderField extends StatelessWidget {
     required this.validator,
     required this.hintText,
     this.inputFormatters,
+    this.keyboardType,
   });
 
   final String title;
@@ -17,6 +18,7 @@ class OrderField extends StatelessWidget {
   final FormFieldValidator<String> validator;
   final List<TextInputFormatter>? inputFormatters;
   final String hintText;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class OrderField extends StatelessWidget {
             controller: controller,
             validator: validator,
             inputFormatters: inputFormatters,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
               hintText: hintText,
               border: defaultBorder,
