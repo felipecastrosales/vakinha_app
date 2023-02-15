@@ -31,11 +31,7 @@ Além disso, também utilizamos bastante os recursos do Flutter, além de vário
 
 <h2>📱 Preview</h2>
 
-<p align="center">
-  <video width="400" controls>
-    <source src=".github/vakinha_app_demo.mp4" type="video/mp4">
-  </video>
-</p>
+https://user-images.githubusercontent.com/59374587/219200964-b65679fd-03e0-49ba-8b95-19c79e918c63.mp4
 
 ---
 
