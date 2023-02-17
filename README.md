@@ -47,15 +47,21 @@ https://user-images.githubusercontent.com/59374587/219200964-b65679fd-03e0-49ba-
 
 - Consulta de API com o Dio;
 - Modelagem de Dados;
-- Utilização do BLoC Pattern e Provider;
-- Utilização de Postman Collections:
-- Fluxo de Login e Logout da aplicação;
-  - Uso de Interceptors do Dio.
+- BLoC Pattern;
+- Postman Collections;
 - Themes;
 - DTOs;
+- Providers;
+- Pattern Matching (match);
+- Mixins;
+- Slivers;
 - Extensions;
 - Environments;
 - Fluxo Carrinho de Compras;
+- Fluxo de Login e Logout da aplicação;
+  - Uso de Interceptors do Dio;
+  - Auth e Refresh Token;
+  - Persistência de dados com shared_preferences;
 - Telas:
   - Splash;
   - Login;
